@@ -1,0 +1,29 @@
+написать схемы моделей и связи между ними, написать модели и написать аутентификацию
+
+usermodel
+ - _id
+ - avatar
+ - last_seen(time)
+ - password
+ - name
+ - lastname
+ - dialogs
+
+dialogsmodel
+ - _id
+ - author
+ - partner
+ - messages(Array<messagemodel>)
+ - created_at, updated_at
+
+messagemodel
+ - _id
+ - created_at, updated_at
+ - text
+ - author
+ - read(boolean)
+ - dialog
+
+relationsheep
+
+
