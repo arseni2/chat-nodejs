@@ -1,6 +1,7 @@
 import {Document, model, Schema} from "mongoose";
 import {ObjectId} from "mongodb";
 
+
 export type DialogSchemaType = {
     author: typeof ObjectId
     partner: typeof ObjectId
@@ -15,7 +16,7 @@ const DialogSchema = new Schema<DialogSchemaType>({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        unique: false
+        unique: false,
     },
     partner: {
         type: Schema.Types.ObjectId,

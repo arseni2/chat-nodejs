@@ -2,6 +2,7 @@ import {Document, model, Schema} from "mongoose";
 import 'moment/locale/ru';
 import {DialogSchemaType} from "../dialogModel/dialog";
 import {ObjectId} from "mongodb";
+import mongoosePaginate = require("mongoose-paginate-v2");
 import moment = require('moment');
 
 export interface userModelInterface extends Document {
@@ -31,5 +32,14 @@ const userScheme = new Schema<userSchemeType>({
     lastname: {type: String, required: true},
     dialogs: [{ type: Schema.Types.ObjectId, ref: 'Dialog', required: false}]
 })
+userScheme.plugin(mongoosePaginate)
+userScheme.set('toJSON', {
+    transform: (_, obj) => {
+        delete obj.__v
+        delete obj.password
+        return obj
+    }
+})
+
 
 export const UserModel = model<userSchemeType>('User', userScheme)

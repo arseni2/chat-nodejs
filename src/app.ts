@@ -1,6 +1,5 @@
-import {run} from "./core/elastic_search";
-
 require('dotenv').config()
+import {userRoute} from "./routes/user/user.route";
 import {dialogRoute} from "./routes/dialog/dialog.route";
 import {host, port, secret_key} from "./config";
 import {authRoute} from "./routes/auth/auth.route";
@@ -13,17 +12,16 @@ import express = require("express");
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 //TODO:
-    //1. доделать диалоги (поиск диалогов)
-        //1. сделать вывод lastMessage
-    //2. отдавать пагинацией всех юзеров
-    //3. сделать поиск юзеров
-    //4. после написания всей логики провети рефакторинг (вынести некоторые данные в env, ...)
+    //4. после написания всей логики провети рефакторинг (вынести некоторые данные в env, удалить некоторые пакеты,постараться убрать все ts-ignore ...)
+    //5. сделать вывод lastMessage у dialog
 //MORE:
     //1. поправить типизацию с user in req вынести в декларатион файл
     //2. user.last_seen работает не корректно
     //3. сделать так чтобы нельза с одним partner создать несколько диалогов
+    //4. сделать поиск диалогов mongoose-fuzzy-searching, https://bit.ly/30Ic3LA
 //ADVICE(советы):
     //1. писать код смотря в заметку по chatapp, чистый код
+    //2. глядеть в заметку chatapp
 
 
 const store = new MongoDBStore({
@@ -55,10 +53,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(passport.initialize());
 app.use(passport.session());
-run()
 
 app.listen(port, host);
 InitServer()
 authRoute(app)
 dialogRoute(app)
+userRoute(app)
 console.log(`starting server on http://${host}:${port}`);

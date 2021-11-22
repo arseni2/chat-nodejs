@@ -1,7 +1,6 @@
 import {DialogModel} from "../../models/dialogModel/dialog";
-import express = require("express");
 import {UserModel} from "../../models/user/user";
-import {createSecureServer} from "http2";
+import express = require("express");
 
 
 export const dialogCreate = async (req: express.Request, res: express.Response) => {
@@ -14,9 +13,7 @@ export const dialogCreate = async (req: express.Request, res: express.Response) 
         await user?.save()
         res.json({dialog})
     } catch (e: any) {
-        if (e.code === 11000) {
-            res.status(400).json({error: {message: 'partner id must be unique'}})
-        } else if (e.name === "ValidationError") {
+        if (e.name === "ValidationError") {
             res.status(400).json({
                 error: {message: e.errors.partner.message}
             })
@@ -44,8 +41,17 @@ export const dialogAll = async (req: express.Request, res: express.Response) => 
     })
 }
 
-export const dialogSearch = async (req: express.Request, res: express.Response) => {
-    const user_id = req?.user?._id
-    const q = req.query.q
-    res.json({ds: q})
+export const dialogDetail = async (req: express.Request, res: express.Response) => {
+    const {dialog_id} = req.params
+    try {
+        const dialog = await DialogModel.findById(dialog_id)
+        res.json({dialog})
+    } catch (e) {
+        res.status(400).json({
+            error: {message: 'dialog id is not valid'}
+        })
+    }
 }
+
+
+
