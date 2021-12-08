@@ -1,6 +1,7 @@
 import express = require("express");
 import {passport} from "../../core/passport";
 import {NextFunction} from "express";
+import { UserModel } from "../../models/user/user";
 
 
 export function CustomErrorAndRegister(req: express.Request, res: express.Response, next: NextFunction) {
@@ -23,3 +24,13 @@ export function isAuthProtect(req: express.Request, res: express.Response, next:
         error: {message: 'user not logined'}
     })
 }
+
+export const updateLastSeen = async (req: express.Request, _: express.Response, next: express.NextFunction) => {
+    if (req.user) {
+        let user = await UserModel.findById(req.user._id)
+        //@ts-ignore
+        user.last_seen = new Date()
+        await user?.save()
+    }
+    return next();
+  };

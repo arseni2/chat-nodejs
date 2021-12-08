@@ -8,10 +8,12 @@
     "bcrypt": "^5.0.1",
     "connect-mongodb-session": "^3.1.1",
     "cors": "^2.8.5",
+    "date-fns": "1.30.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.2",
+    "faker": "^5.5.3",
     "moment": "^2.29.1",
     "mongodb": "^4.1.3",
     "mongoose": "^6.0.12",
@@ -20,6 +22,7 @@
     "nodemon": "^2.0.14",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
+    "socket.io": "^4.4.0",
     "ts-node": "^10.4.0"
   },
   "scripts": {
@@ -32,6 +35,7 @@
     "@types/express": "^4.17.13",
     "@types/express-flash": "^0.0.2",
     "@types/express-session": "^1.17.4",
+    "@types/faker": "^5.5.9",
     "@types/moment": "^2.13.0",
     "@types/mongoose": "^5.11.97",
     "@types/mongoose-paginate-v2": "^1.4.0",
@@ -39,6 +43,7 @@
     "@types/node": "^16.11.6",
     "@types/passport": "^1.0.7",
     "@types/passport-local": "^1.0.34",
+    "@types/socket.io": "^3.0.2",
     "tsc": "^2.0.3",
     "tsconfig.json": "^1.0.10",
     "typescript": "^4.4.4"
